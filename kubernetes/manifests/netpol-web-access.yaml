@@ -1,0 +1,18 @@
+---
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: web-access
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      name: web
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              name: web
+      ports:
+        - protocol: TCP
+          port: 80

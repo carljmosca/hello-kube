@@ -1,0 +1,26 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    name: web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      volumes:
+      - name: docs-volume
+        hostPath:
+          path: /Users/moscac/docs
+      containers:
+      - name: web
+        image: nginx
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: docs-volume
+        ports:
+        - containerPort: 80
